@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mxep%=)azdcjg%py)%7h31&y9+$(pmbxp$v89ml7()5f#6li8j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['starunion.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['starunion.pythonanywhere.com', '127.0.0.1', '.vercel.app']
 
 
 # Application definition

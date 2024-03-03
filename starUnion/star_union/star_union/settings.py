@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
+import os
 
 
 # JWT settings
@@ -24,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mxep%=)azdcjg%py)%7h31&y9+$(pmbxp$v89ml7()5f#6li8j'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['starunion.pythonanywhere.com', '127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 
 
 # Application definition
@@ -125,27 +127,32 @@ WSGI_APPLICATION = 'star_union.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+database_url = os.environ.get('DATABASE_URL')
 DATABASES = {
-    "default": {},
-    "main_db": {
-        "NAME": "main.sqlite3",
-        "ENGINE": "django.db.backends.sqlite3",
+    "default": {
     },
-    "workshops_db": {
-        "NAME": "workshops.sqlite3",
-        "ENGINE": "django.db.backends.sqlite3",
-    },
-    "events_db": {
-        "NAME": "events.sqlite3",
-        "ENGINE": "django.db.backends.sqlite3",
-    }
+    # "main_db": {
+    #     "NAME": "main.sqlite3",
+    #     "ENGINE": "django.db.backends.sqlite3",
+    # },
+    # "workshops_db": {
+    #     "NAME": "workshops.sqlite3",
+    #     "ENGINE": "django.db.backends.sqlite3",
+    # },
+    # "events_db": {
+    #     "NAME": "events.sqlite3",
+    #     "ENGINE": "django.db.backends.sqlite3",
+    # }
 }
+
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Custom Authentication to our custom user
 AUTHENTICATION_BACKEND = []
 
-DATABASE_ROUTERS = ['star_union.routers.mainRouter',
-                    'star_union.routers.workShopRouter', 'star_union.routers.eventRouter']
+# DATABASE_ROUTERS = ['star_union.routers.mainRouter',
+#                     'star_union.routers.workShopRouter', 'star_union.routers.eventRouter']
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

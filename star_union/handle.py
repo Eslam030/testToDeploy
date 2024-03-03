@@ -63,7 +63,7 @@ def deleteMigrations(directory):
 
 # put your django project
 deleteMigrations(
-    'C:\\Users\\aba\\Downloads\\starUnionWorking\\starUnion_BackEnd\\starUnion\\star_union')
+    'C:\\Users\\aba\\Downloads\\testToDeploy\\star_union')
 
 # put your django env path
 deleteMigrations('C:\\Users\\aba\\Downloads\\env\\Lib\\site-packages\\django')
